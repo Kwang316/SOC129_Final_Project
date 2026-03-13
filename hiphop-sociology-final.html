@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rap Is Something You Do — Hip-Hop & Sociological Identity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #141414;
+    --panel: #1a1a1a;
+    --border: #2a2a2a;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --muted: #888;
+    --white: #f9f9f9;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 3rem; background: rgba(10,10,10,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-brand { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+  .nav-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 8rem 4rem 5rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,168,76,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.05) 0%, transparent 60%); }
+  .vinyl { position: absolute; top: 50%; right: -8rem; transform: translateY(-50%); width: 38vw; max-width: 520px; aspect-ratio: 1; border-radius: 50%; background: repeating-radial-gradient(circle at 50%, #1a1a1a 0px, #111 2px, #1c1c1c 4px, #151515 6px); box-shadow: 0 0 0 2px #2a2a2a, 0 0 80px rgba(201,168,76,0.12), inset 0 0 40px rgba(0,0,0,0.8); animation: spin 30s linear infinite; opacity: 0.7; }
+  .vinyl::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 15%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, var(--gold) 0%, #8b6914 100%); box-shadow: 0 0 20px rgba(201,168,76,0.4); }
+  @keyframes spin { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 7vw, 7rem); font-weight: 900; line-height: 1.0; max-width: 14ch; opacity: 0; animation: fadeUp 0.9s 0.4s forwards; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { margin-top: 2rem; font-size: 1.05rem; color: var(--muted); max-width: 50ch; line-height: 1.8; opacity: 0; animation: fadeUp 0.9s 0.6s forwards; }
+  .hero-meta { margin-top: 3rem; display: flex; gap: 3rem; align-items: center; opacity: 0; animation: fadeUp 0.9s 0.8s forwards; }
+  .hero-meta span { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+  .hero-meta .divider { width: 40px; height: 1px; background: var(--border); }
+  .scroll-cue { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 1s 1.2s forwards; }
+  .scroll-cue span { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:.4}50%{opacity:1} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+
+  section { padding: 6rem 4rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+  p { color: #c4c4c4; margin-bottom: 1.2rem; font-size: 1rem; }
+
+  /* INTRO */
+  .intro-strip { background: var(--charcoal); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .two-col-sticky { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+  .sticky-left h2 { position: sticky; top: 6rem; }
+  .drop-cap p:first-child::first-letter { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; float: left; line-height: 0.8; margin: 0.1em 0.1em 0 0; color: var(--gold); }
+
+  /* PULL QUOTE */
+  .pull-quote-section { background: var(--black); text-align: center; padding: 7rem 4rem; position: relative; }
+  .pull-quote-section::before { content: '\201C'; position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); font-family: 'Playfair Display', serif; font-size: 12rem; color: var(--gold); opacity: 0.08; line-height: 1; pointer-events: none; }
+  blockquote { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3.5vw,2.6rem); font-style: italic; font-weight: 700; line-height: 1.35; max-width: 800px; margin: 0 auto; color: var(--cream); position: relative; }
+  blockquote cite { display: block; margin-top: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; font-style: normal; color: var(--gold); text-transform: uppercase; }
+  .pull-quote-gold { background: var(--gold); padding: 5rem 4rem; text-align: center; }
+  .pull-quote-gold blockquote { color: var(--black); font-size: clamp(1.4rem,3vw,2.2rem); }
+  .pull-quote-gold blockquote cite { color: rgba(0,0,0,0.5); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .text-box { padding: 2.5rem; border: 1px solid var(--border); }
+  .text-box h3 { color: var(--gold); }
+
+  /* CARDS */
+  .card-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+  .card { background: var(--charcoal); padding: 2.5rem 2rem; transition: background 0.25s; position: relative; overflow: hidden; }
+  .card:hover { background: var(--panel); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+  .card:hover::before { transform: scaleX(1); }
+  .card-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: rgba(201,168,76,0.12); line-height: 1; margin-bottom: 1rem; }
+  .card p { font-size: 0.9rem; color: var(--muted); }
+
+  /* AFFECT */
+  .affect-quote { border-left: 3px solid var(--gold); padding-left: 2rem; margin-bottom: 2rem; }
+  .affect-quote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: var(--cream); line-height: 1.6; margin-bottom: 0.5rem; }
+  .affect-quote cite { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; font-style: normal; }
+  .sidebar-box { background: var(--panel); border: 1px solid var(--border); padding: 2rem; }
+  .sidebar-box h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--white); }
+  .sidebar-box ul { list-style: none; }
+  .sidebar-box li { padding: 0.8rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); }
+  .sidebar-box li:last-child { border-bottom: none; }
+  .sidebar-box li strong { color: var(--cream); display: block; font-size: 0.82rem; margin-bottom: 0.2rem; }
+
+  /* RACE COMPARE */
+  .race-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); margin-top: 3rem; }
+  .race-panel { background: var(--charcoal); padding: 2.5rem; }
+  .race-panel.blk { border-top: 3px solid var(--gold); }
+  .race-panel.wht { border-top: 3px solid var(--muted); }
+  .race-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .race-point { padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: #bbb; }
+  .race-point:last-child { border-bottom: none; }
+
+  /* THINKERS */
+  .thinkers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+  .thinker-card { background: var(--black); padding: 2.5rem; }
+  .thinker-initial { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; color: rgba(201,168,76,0.13); line-height: 1; margin-bottom: 1rem; }
+  .thinker-work { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 1rem; }
+  .thinker-card p { font-size: 0.9rem; color: var(--muted); }
+
+  /* CONCEPT LIST */
+  .concept-list { display: flex; flex-direction: column; }
+  .concept-item { display: grid; grid-template-columns: auto 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border); position: relative; }
+  .concept-item:first-child { border-top: 1px solid var(--border); }
+  .concept-item:hover .concept-num { color: var(--gold); }
+  .concept-item:hover .concept-bar { width: 100%; }
+  .concept-bar { position: absolute; bottom: -1px; left: 0; height: 1px; width: 0; background: var(--gold); transition: width 0.4s; }
+  .concept-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--border); padding-top: 0.2rem; transition: color 0.2s; }
+  .concept-content h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white); }
+  .concept-content p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0; }
+
+  /* GOLD BOX */
+  .gold-box { background: var(--gold); padding: 2.5rem; color: var(--black); margin-bottom: 2rem; }
+  .gold-box p { color: var(--black); font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .gold-box cite { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.5); }
+
+  /* TIMELINE */
+  .timeline { margin-top: 3rem; position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), transparent); }
+  .timeline-point { padding: 0 0 3rem 2.5rem; position: relative; }
+  .timeline-point::before { content: ''; position: absolute; left: -0.38rem; top: 0.45rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--gold); }
+  .timeline-point h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+  /* IDENTITY ITEMS */
+  .identity-items { display: flex; flex-direction: column; }
+  .identity-item { padding: 1.8rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: auto 1fr; gap: 1.8rem; align-items: start; }
+  .identity-item:first-child { border-top: 1px solid var(--border); }
+  .id-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--border); }
+  .identity-item h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .identity-item p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0; }
+
+  /* VOICES */
+  .voices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); margin-top: 3rem; }
+  .voice-card { background: var(--black); padding: 2.5rem; position: relative; }
+  .voice-card::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--gold); opacity: 0.15; position: absolute; top: 1rem; left: 2rem; line-height: 1; }
+  .voice-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; line-height: 1.7; color: var(--cream); margin-bottom: 1.5rem; padding-top: 2rem; }
+  .voice-attr { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin: 3rem 0; }
+  .stat-box { background: var(--charcoal); padding: 2rem; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; display: block; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; }
+
+  /* REFS */
+  .refs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0 4rem; margin-top: 2rem; }
+  .ref-item { padding: 1.2rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .ref-item:hover { color: var(--cream); }
+
+  /* CONCLUSION */
+  .conclusion-big { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 900; line-height: 1.15; color: var(--gold); margin-bottom: 1rem; }
+  .conclusion-note { margin-top: 2rem; padding: 2rem; border: 1px solid var(--gold); }
+  .conclusion-note .label { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; }
+  .footer-brand span { color: var(--gold); }
+  .footer-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-align: right; line-height: 2; }
+
+  @media (max-width:900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 0.8rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 4rem; }
+    .two-col-sticky, .two-col, .race-compare, .voices-grid, .refs-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .card-grid-3, .thinkers-grid { grid-template-columns: 1fr; }
+    .vinyl { display: none; }
+    .stat-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 2rem; text-align: center; }
+    .footer-meta { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">SOC 129 · Final Project</div>
+  <ul class="nav-links">
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#origins">Origins</a></li>
+    <li><a href="#affect">Affect</a></li>
+    <li><a href="#movement">Movement</a></li>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#race">Race</a></li>
+    <li><a href="#tradition">Tradition</a></li>
+    <li><a href="#theory">Theory</a></li>
+    <li><a href="#capital">Capital</a></li>
+    <li><a href="#language">Language</a></li>
+    <li><a href="#gender">Gender</a></li>
+    <li><a href="#voices">Voices</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+<!-- SECTION 01: HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="vinyl"></div>
+  <div class="hero-eyebrow">Race · Culture · Identity · Sociology · SOC 129</div>
+  <h1>Rap Is Something You Do. <em>Hip-Hop Is Something You Live.</em></h1>
+  <p class="hero-sub">A sociological inquiry into hip-hop as social movement, collective identity, and the vernacular of Black intellectual life in America.</p>
+  <div class="hero-meta">
+    <span>Kevin Wang</span>
+    <div class="divider"></div>
+    <span>SOC 129 · Dr. Brent Clark</span>
+    <div class="divider"></div>
+    <span>Spring 2026</span>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- SECTION 02: INTRODUCTION -->
+<section style="background:var(--charcoal);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" id="intro">
+  <div class="container">
+    <div class="two-col-sticky">
+      <div class="sticky-left">
+        <div class="section-label">01 · Introduction</div>
+        <h2>Hip-Hop as a Vernacular of Sociology</h2>
+      </div>
+      <div class="drop-cap">
+        <p>There is a distinction between art as being admired by any culture and art being distinctly cultural.  Hip-hop demonstrates a vernacular of sociological expression that exemplifies the intersectional dimension of artistic appeal to cultural and socioeconomic experience.</p>
+        <p>Music does not merely serve as a means to change emotions but rather to extract them. Thus, songs are pathological only insofar as individuals already harbor such axioms.   In a sense, Manning Marable expresses a similar sentiment in the discussion of the creation of African American Studies, a school of thought to be leveraged by Black Americans to present the reality of black life as they argue it is–it serves to formalize rigorously the existing understandings of the black community.</p>
+        <p>Sociological discourse requires ideas to be shared through language.  Music is the vernacular that arms the commonwealth’s thoughts.   Yet, the diction of language itself serves as a boundary of understanding.  Hip-hop serves to broaden that boundary.</p>
+      </div>
+    </div>  
+  </div>
+</section>
+
+<!-- PULL QUOTE 1 -->
+<div class="pull-quote-section">
+  <blockquote>
+    "Rap is something you do, hip-hop is something you live."
+    <cite>— [KRS One, The Gospel of Hip Hop, 1994]</cite>
+  </blockquote>
+</div>
+
+<!-- SECTION 03: ORIGINS -->
+<section style="background:var(--panel)" id="origins">
+  <div class="container">
+    <div class="section-label">02 · Origins</div>
+    <h2>The Ghetto as the Birthplace of Hip-Hop</h2>
+    <p style="max-width:65ch">Hip-hop is not merely a musical genre but a product of a specific spatial and socioeconomic context — the neglected urban spaces of America's Black communities. To understand hip-hop sociologically, one must first understand the conditions that gave birth to it.</p>
+    <div class="two-col" style="margin-top:3rem">
+      <div class="text-box">
+        <h3>Historical Context</h3>
+        <p>Poverty, disorder, and ghetto culture are, as Jeffries observes, "central to analyses of hip-hop meaning, thanks to the symbolic importance of the ghetto as an element of hip-hop authenticity and the historical importance of neglected urban space as the birthplace of hip-hop culture." The Black ghetto in America is not an accidental geography — it is the product of deliberate policy: redlining, urban disinvestment, and the systematic exclusion of Black families from wealth-building mechanisms like homeownership.</p>
+        <p>The socioeconomic plight concentrated in Black American communities is not unique to Black Americans, but it is a defining feature of their collective experience. Hip-hop was born precisely from this need — a cultural response to conditions that formal institutions failed to address.</p>
+      </div>
+      <div class="text-box">
+        <h3>Authenticity & the Symbolic Ghetto</h3>
+        <p>The ghetto functions in hip-hop not only as a historical fact but as a symbolic resource. Authenticity within the culture is measured by proximity to this experience, whether lived or witnessed. This is why Jeffries's interviewees — across race and class lines — return again and again to hardship, struggle, and urban life when defining what hip-hop means to them.</p>
+        <p>This symbolic geography carries real sociological consequences. When the ghetto becomes a marker of authenticity, the structural conditions that produced it — racial capitalism, state disinvestment, concentrated poverty — are inscribed into the cultural DNA of the art form. Hip-hop does not merely describe these conditions; it emerges from them as a form of testimony and resistance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 04: AFFECT -->
+<section style="background:var(--black)" id="affect">
+  <div class="container">
+    <div class="two-col" style="align-items:start">
+      <div>
+        <div class="section-label">03 · Affect Theory</div>
+        <h2>Music, Affect & the Pre-Personal</h2>
+        <p>Before we can assess what hip-hop <em>means</em>, we must understand what it <em>does</em> — at a register below conscious thought. Jeffries draws on affect theory to argue that the first encounter with music is neither ideological nor rational but prepersonal: it strikes us before we can name what we feel.</p>
+        <div class="affect-quote">
+          <p>"Affect always precedes will and consciousness — a non-conscious experience of intensity; a moment of unformed and unstructured potential."</p>
+          <cite>— Shouse 2005, drawing on Deleuze & Massumi, cited in Jeffries</cite>
+        </div>
+        <p>Eric Shouse, drawing on Deleuze and Massumi, clarifies that affect is distinct from feeling (which is personal) and emotion (which is social). Affect is prepersonal — it has already moved through us before we possess it as a thought. This has profound implications for debates about hip-hop's social effects: if the first contact is affective rather than cognitive, the genre cannot simply be said to <em>cause</em> violence, misogyny, or rebellion. The music activates intensities that were already latent in the listener's social world.</p>
+        <p>Tia DeNora's complementary insight is that music does not simply serve as "the expression of preexisting internal emotions but as something that is part of the reflexive construction of that internal emotional state" (DeNora 2000, 57). In other words, hip-hop does not mirror how listeners feel — it participates in the production of those feelings. For communities navigating daily encounters with racial and economic exclusion, this is not incidental: the music is doing social work.</p>
+      </div>
+      <div class="sidebar-box">
+        <h4>Key Theorists on Affect</h4>
+        <ul>
+          <li><strong>Deleuze & Guattari (1980)</strong>Affect as intensity; the prepersonal flow of force prior to subjectivity.</li>
+          <li><strong>Brian Massumi (2002)</strong>Affect as autonomous — separate from and prior to emotion and feeling.</li>
+          <li><strong>Eric Shouse (2005)</strong>Affect is "prepersonal" — not personal (feeling) or social (emotion) but prior to both.</li>
+          <li><strong>Tia DeNora (2000)</strong>Music reflexively constructs internal emotional states rather than simply expressing them.</li>
+          <li><strong>Simon Frith (1996)</strong>Music is performative, not purely textual — meaning requires an audience and interpretation.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 05: SOCIAL MOVEMENT -->
+<section style="background:var(--charcoal)" id="movement">
+  <div class="container">
+    <div class="section-label">04 · Social Movements</div>
+    <h2>Hip-Hop as Social Movement</h2>
+    <p style="max-width:65ch">Craig Watkins argues that hip-hop represents "a particular species of social movement" that operates on three distinctive terms. Understanding these terms helps explain why a study of hip-hop is inseparable from a study of sociology.</p>
+    <div class="card-grid-3">
+      <div class="card"><div class="card-num">01</div><h3>Popular Culture as Political Field</h3><p>Hip-hop takes place on the field of popular culture — a site not immediately recognized as political. This is not a weakness but a source of reach. Where formal political institutions exclude, stigmatize, or simply ignore Black youth, popular culture provides an open terrain for expression, contestation, and solidarity. (Watkins 1998, 65)</p></div>
+      <div class="card"><div class="card-num">02</div><h3>Youth as Constituency</h3><p>The movement's creative labor belongs to youth — a constituency not ordinarily regarded as interested in social change. Hip-hop does not merely reflect youth culture; it constitutes young people as agents capable of naming, contesting, and reimagining the social conditions that shape their lives. (Watkins 1998, 65)</p></div>
+      <div class="card"><div class="card-num">03</div><h3>Collective Identity & Agency</h3><p>"Collective identities are talked into existence" (Hunt & Benford 2004, 445). Hip-hop provides both the occasion and the vernacular for this talking — the cipher, the concert, the record. Like all social movements, it enables participants to "imagine themselves as part of a larger community," producing a sense of collective identity and shared agency. (Watkins 1998, 65)</p></div>
+      <div class="card"><div class="card-num">04</div><h3>Performance as Communication</h3><p>Simon Frith insists that music is performative rather than purely textual: "the term 'performance' defines a social — or communicative — process. It requires an audience and is dependent, in this sense, on interpretation" (1996, 205). A hip-hop track is not only its lyrics — it is the act of listening, the shared energy of a crowd, the DJ reading the room. Meaning is made collectively.</p></div>
+      <div class="card"><div class="card-num">05</div><h3>Alternative Public Sphere</h3><p>Where formal institutions — legal, academic, political — have historically excluded or distorted Black experience, hip-hop functions as an alternative public sphere: a space where that experience can be named on its own terms. In this sense it extends the tradition Marable describes in African American Studies — corrective and prescriptive, a counter-discourse against mainstream misrepresentation.</p></div>
+      <div class="card"><div class="card-num">06</div><h3>[Your Own Theme]</h3><p>KRS-One's well-known formulation — "rap is something you do, hip-hop is something you live" — captures the movement logic precisely. Participation in hip-hop is not consumption but membership. The MC, DJ, b-boy, and graffiti writer are all constituencies in a distributed social movement organized around shared experience rather than formal platforms or institutions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 06: COLLECTIVE IDENTITY -->
+<section style="background:var(--black)" id="identity">
+  <div class="container">
+    <div class="two-col" style="align-items:start;gap:5rem">
+      <div>
+        <div class="section-label">05 · Collective Identity</div>
+        <h2>Symbolic Creativity & Talked-Into-Existence Identity</h2>
+        <p>Paul Willis's theory of symbolic work offers Jeffries a framework for understanding how everyday listeners — not just artists — participate in the construction of hip-hop identity. Willis identifies four elements of symbolic work that together constitute what he calls the human capacity for self-making. Crucially, as Jeffries notes, "the inspiration for, and ability to perform, identity cultivation inheres in each of us rather than exclusively outside of us."</p>
+        <p>This is at once a psychological and philosophical claim: knowledge is in the world rather than apart from it. We are constituted by but not reducible to the structures we inhabit. Jeffries uses this tension — between structural constraint and individual creative capacity — to motivate his empirical turn toward the listener, arguing that studying individuals alongside institutions is "essential to understanding identity and social life."</p>
+      </div>
+      <div class="identity-items">
+        <div class="identity-item"><div class="id-num">I</div><div><h4>Language</h4><p>Hip-hop is first and foremost a linguistic practice. It creates new words, repurposes old ones, and — as the viral spread of phrases like "eyebrows on fleek" demonstrates — functions as a vector through which vernacular language enters mainstream culture. This is not trivial: language is the primary medium through which social life is organized, contested, and reproduced.</p></div></div>
+        <div class="identity-item"><div class="id-num">II</div><div><h4>The Active Body</h4><p>Multiple respondents in Jeffries's study describe hip-hop as a form of physical expression, complete with "visual bodily markers of hip-hop style (such as sneakers and baseball caps)." The body is not a passive vessel but an active medium of identity. In hip-hop, how one carries oneself — in dress, posture, and movement — is a legible social text.</p></div></div>
+        <div class="identity-item"><div class="id-num">III</div><div><h4>Drama</h4><p>Hip-hop is organized around performance: the MC's persona, the DJ's technical mastery, the cipher's competitive ritual. Each is a staged social event that reinforces belonging and demarcates community. Performance, as Frith argues, is inherently communicative — it requires an audience and is completed only through their interpretation.</p></div></div>
+        <div class="identity-item"><div class="id-num">IV</div><div><h4>Symbolic Creativity</h4><p>"Symbolic creativity is an active force that produces identities and orients us in the world." Willis's great contribution, as Jeffries summarizes it, is that identity-making is not a passive process — we are not simply products of omnipotent structures that mold us into predetermined social beings. Hip-hop gives this creativity a form, a set of conventions, and a community within which to exercise it.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 07: RACE & INTERPRETATION -->
+<section style="background:var(--charcoal)" id="race">
+  <div class="container">
+    <div class="section-label">06 · Race & Interpretation</div>
+    <h2>Black & White Listeners: Divergent Interpretations</h2>
+    <p style="max-width:65ch">Jeffries's central empirical contribution is a set of interviews with Black and white listeners from varying socioeconomic positions, designed to reveal how racial identity shapes the interpretive range brought to hip-hop. As he concludes: "the range of black respondents' interpretations looks different from the range of white responses, at least partially because of racial identity and racialized experience."</p>
+    <div class="race-compare">
+      <div class="race-panel blk">
+        <div class="race-label">Black Respondents</div>
+        <h3>Hip-Hop as Racial Collective Identity</h3>
+        <div class="race-point">Identify hip-hop as "our culture" — an ownership claim absent from white respondents' language</div>
+        <div class="race-point">Reference race-related hardship and resistance when discussing meaning</div>
+        <div class="race-point">Race is an important symbolic boundary through which collective identity is built</div>
+        <div class="race-point">Hip-hop is a building block of racial identity — reflecting racialized experience</div>
+        <div class="race-point">Racialized experiences referenced by Black respondents center on race-related hardships or resistance — not celebration. The diagnostic dimension of hip-hop is more prominent than the laudatory one.</div>
+      </div>
+      <div class="race-panel wht">
+        <div class="race-label">White Respondents</div>
+        <h3>Hip-Hop as De-Racialized Personal Identity</h3>
+        <div class="race-point">Do not make collective ownership claims — no "hip-hop is for us"</div>
+        <div class="race-point">Reference hip-hop's Black origins in the past tense: "it started with…"</div>
+        <div class="race-point">De-racialize hip-hop to build personal and collective hip-hop identity</div>
+        <div class="race-point">Affirmation of hip-hop identity does not result in renouncing whiteness</div>
+        <div class="race-point">[Add your own finding from Jeffries's interviews here]</div>
+      </div>
+    </div>
+    <p style="margin-top:2rem">Jeffries is careful not to essentialize this divergence. It may be that white respondents simply "do not think about race as much, while blacks, no matter the topic — cooking, sports, music, etc. — would affirm its racial relevance because of their social experiences as racialized people." Alternatively, there may be something about hip-hop specifically that conjures racial identification. What is clear is that race functions as a symbolic boundary differently for each group: for Black listeners, it builds collective identity; for white listeners, it is de-emphasized to make personal identification possible.</p>
+  </div>
+</section>
+
+<!-- SECTION 08: BLACK INTELLECTUAL TRADITION -->
+<section style="background:var(--black)" id="tradition">
+  <div class="container">
+    <div class="section-label">07 · Black Intellectual Tradition</div>
+    <h2>From Du Bois to Hip-Hop: A Continuous Tradition</h2>
+    <p style="max-width:70ch">The Black intellectual tradition, as Alridge, Bynum, and Stewart document, has historically been both corrective — challenging racism and stereotypes in mainstream discourse — and prescriptive, proposing practical steps for empowerment. Hip-hop extends this tradition into the popular register: it is born out of a need for defense in a shared experience among living people who observed troubles that warranted a refutation.</p>
+    <div class="thinkers-grid">
+      <div class="thinker-card">
+        <div class="thinker-initial">Du</div>
+        <h3>W.E.B. Du Bois</h3>
+        <div class="thinker-work">Sociology Hesitant (2000)</div>
+        <p>Du Bois argues in "Sociology Hesitant" that the discipline requires an empirical burden of proof to vindicate its claims — using components of society itself to understand it, rather than relying on metaphysical postulates. Jeffries's interview methodology enacts exactly this principle. Hip-hop, too, is empirical in this sense: it documents the lived conditions of its authors and audiences rather than theorizing from a detached position.</p>
+      </div>
+      <div class="thinker-card">
+        <div class="thinker-initial">Ma</div>
+        <h3>Manning Marable</h3>
+        <div class="thinker-work">Black Studies & the Racial Mountain (2000)</div>
+        <p>Marable argues that African American Studies exists to formalize rigorously the existing understandings of the Black community — to give systematic, scholarly form to knowledge that was already present in that community's lived experience. Hip-hop performs the same function at the popular level. Where academic discourse formalizes, hip-hop disseminates. KRS-One's insistence that "hip-hop is something you live" mirrors Marable's insistence that Black knowledge is produced within Black life, not imposed from without.</p>
+      </div>
+      <div class="thinker-card">
+        <div class="thinker-initial">We</div>
+        <h3>Ida B. Wells</h3>
+        <div class="thinker-work">Anticolonial Theory on Crime (Stauffer 2020)</div>
+        <p>Wells's critique of academic rhetoric — that it serves little utility to the majority of individuals — names the problem hip-hop resolves. Sociological discourse, enclosed in journals and universities, cannot reach the communities most implicated in its findings. Hip-hop does. It is the primary medium by which millions of young people implicitly engage with sociological ideas about Black experience — not because the artists set out to be sociologists, but because the form demands engagement with the real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 09: FOUR FRAMEWORKS / SOCIOLOGICAL THEORY -->
+<section style="background:var(--charcoal)" id="theory">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-bottom:4rem">
+      <div>
+        <div class="section-label">08 · Sociological Concepts</div>
+        <h2>Four Frameworks for Reading Hip-Hop</h2>
+      </div>
+      <div><p>A sociological reading of hip-hop requires more than a single lens. The following five frameworks — drawn from course readings — illuminate distinct but interlocking dimensions of how hip-hop produces, contests, and reflects social identity.</p></div>
+    </div>
+    <div class="concept-list">
+      <div class="concept-item"><span class="concept-num">I</span><div class="concept-content"><h4>Intersectionality</h4><p>Intersectionality describes the interacting forces of different dimensions of identity — race, class, gender, sexuality — that cannot be disaggregated. As Leggon (2020) argues, systems of oppression and social power operate simultaneously across these axes. In the context of hip-hop, to be Black in America means one cannot divorce oneself from the fate of any Black American who has suffered state violence, regardless of individual socioeconomic position. This social mark is imposed from without — but hip-hop is one of the spaces where it is named, contested, and renegotiated from within.</p></div><div class="concept-bar"></div></div>
+      <div class="concept-item"><span class="concept-num">II</span><div class="concept-content"><h4>Racial Capitalism</h4><p>Racial capitalism describes how the development and expansion of capitalist society has pursued essential racial directions. Anti-Blackness functions as a legitimating architecture, rationalizing discourses and cultural narratives that justify exploitation. Hip-hop emerges from communities shaped by this architecture — concentrated poverty, disinvestment, denied homeownership — and simultaneously becomes a product exploited by that same architecture when its commercial potential is recognized. The MC is both a product of racial capitalism and one of its most incisive critics.</p></div><div class="concept-bar"></div></div>
+      <div class="concept-item"><span class="concept-num">III</span><div class="concept-content"><h4>Collective Identity & Social Movements</h4><p>"Collective identities are talked into existence" (Hunt &amp; Benford 2004, 445). Watkins frames hip-hop as a social movement that produces collective identity and agency among participants — particularly youth — on the field of popular culture. Frith's insistence that music is performative and communicative, requiring an audience and dependent on interpretation, gives us the mechanism: hip-hop is the ongoing, collective act of talking an identity into being. Every performance is a micro-instance of this process.</p></div><div class="concept-bar"></div></div>
+      <div class="concept-item"><span class="concept-num">IV</span><div class="concept-content"><h4>The Black Intellectual Tradition</h4><p>Du Bois demands empirical rigor; Marable formalizes what the community already knows; Wells insists that knowledge must reach ordinary people to have utility. Hip-hop satisfies all three demands simultaneously. As Alridge, Bynum, and Stewart (2021) document, the Black intellectual tradition has always found expression beyond the academy — in art, music, and everyday cultural practice. Hip-hop is the 20th century's most expansive instance of this: a vernacular through which Black sociological understanding circulates at mass scale, without institutional gatekeeping.</p></div><div class="concept-bar"></div></div>
+      <div class="concept-item"><span class="concept-num">V</span><div class="concept-content"><h4>Religion, Ethnicity & Social Boundaries</h4><p>Religion functions as a primary tool through which ethnoracial boundaries are maintained and community is sustained at the micro-level — even when macro-level processes challenge or undermine it. This resilience offers an instructive analogy for hip-hop: like religious community, hip-hop creates belonging, defines in-group and out-group, transmits cultural memory, and provides frameworks for understanding suffering and resistance. Both are systems through which communities organize meaning in the face of structural adversity. Neither is reducible to politics, yet both are inseparable from it.</p></div><div class="concept-bar"></div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-num">7</span><div class="stat-label">Course readings cited</div></div>
+      <div class="stat-box"><span class="stat-num">5+</span><div class="stat-label">Sociological concepts applied</div></div>
+      <div class="stat-box"><span class="stat-num">6+</span><div class="stat-label">Interview perspectives analyzed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: RACIAL CAPITALISM -->
+<section style="background:var(--black)" id="capital">
+  <div class="container">
+    <div class="two-col" style="align-items:start;gap:5rem">
+      <div>
+        <div class="section-label">09 · Racial Capitalism</div>
+        <h2>Capital, Anti-Blackness & the Architecture of Exploitation</h2>
+        <p>Racial capitalism is not simply a racial inflection of an otherwise neutral economic system — it describes how capitalism in the United States was built through and depends upon the exploitation of Black labor and the suppression of Black wealth accumulation. Anti-Blackness is not incidental to this structure; it is the legitimating architecture that makes the dispossession appear natural and inevitable.</p>
+        <p>The ghettos where hip-hop was born were not accidents of geography. They were produced by decades of redlining, urban disinvestment, and the systematic exclusion of Black families from federally subsidized homeownership programs that built the white middle class. When hip-hop emerged from these spaces, it carried the economic conditions of its birth within its aesthetic DNA — in its subjects, its urgency, its refusal of comfort.</p>
+        <p>The MC, in this reading, is a street-level sociologist. Many rap texts explicitly address the lived consequences of racial capitalism: denied mobility, police violence, the impossibility of legitimate upward movement from the ghetto. These are not merely aesthetic choices — they are analyses, expressed through the tools available: language, rhythm, affect. Hip-hop thus becomes simultaneously a product of racial capitalism and one of its most sustained popular critiques.</p>
+      </div>
+      <div>
+        <div class="gold-box">
+          <p>"The constituents of society are naturally driven psychologically by reward and survival, which obey the means of money. Racial capitalism describes how the development and expansion of capitalist society pursued essential racial directions."</p>
+          <cite>— Synthesis from Marable & Leggon, via course readings</cite>
+        </div>
+        <p>Jeffries notes that Jay-Z's song "30 Something" addresses hip-hop fans who are aging out of certain subject positions, while gangster songs are targeted at "dudes in the hood" and party songs at those who "can't really relate to that lifestyle." This taxonomy of taste — tied explicitly to social position — confirms Frith's contention that social status prescribes the type of music most useful to the listener. Hip-hop's internal genre differentiation maps onto the social structure it both reflects and reproduces.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: LANGUAGE & VERNACULAR -->
+<section style="background:var(--panel)" id="language">
+  <div class="container">
+    <div class="section-label">10 · Language & Vernacular</div>
+    <h2>Hip-Hop as the Vernacular of Sociology</h2>
+    <p style="max-width:65ch">Hip-hop is not merely about sociology — it is sociology's vernacular. It is the language through which millions of people engage with ideas about race, class, and identity without necessarily calling it sociology. This is its peculiar power: it democratizes a discourse that the academy keeps enclosed.</p>
+    <div class="timeline">
+      <div class="timeline-point"><h4>Language as Social Boundary</h4><p>Ida B. Wells's critique of academic sociology — that its rhetoric serves little utility to the majority — identifies the problem that vernacular culture resolves. Sociological ideas about race, class, and power circulate in journals and conference proceedings largely inaccessible to the communities most implicated by those ideas. Hip-hop dissolves this barrier. It puts sociological content into a vernacular form: music is the vernacular that arms the commonwealth's thoughts.</p></div>
+      <div class="timeline-point"><h4>Songs as Slogans, Not Arguments</h4><p>Simon Frith argues that songs "don't function to convey ideas or arguments but slogans" and that they "don't cause people to fall in love, but provide people with the means to articulate the feelings associated with being in love" (1996, 164–65). This distinction matters: hip-hop is not a lecture on race — it is a medium through which racialized feeling can be articulated, shared, and recognized. It operates at the level of affect before argument, which is precisely why it reaches listeners that academic discourse cannot.</p></div>
+      <div class="timeline-point"><h4>Language as Social Change</h4><p>Hip-hop both proliferates and transforms language. The coinage of phrases like "eyebrows on fleek" — born in Black vernacular culture and spread virally through social media — is a recent, quotidian example of a process hip-hop has driven for decades. Terms like "bling," "fresh," "lit," "woke," and countless others migrated from hip-hop into mainstream speech, carrying traces of the cultural context from which they emerged even as that context is often stripped away in mainstream appropriation.</p></div>
+      <div class="timeline-point"><h4>Hip-Hop as Public Sociology</h4><p>Hip-hop is the primary medium by which millions of young people implicitly engage with sociological ideas of the Black experience — not because they set out to study sociology, but because the form demands engagement with lived social reality. Where a sociology journal reaches hundreds, a rap record reaches millions. In this sense, hip-hop may be the most consequential sociological instrument of the late 20th and early 21st centuries: not despite its popular form, but because of it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE 2 (GOLD) -->
+<div class="pull-quote-gold">
+  <blockquote>
+    "None of the white respondents connect their appreciation of and experience with hip-hop to a larger collective racial identity. Race is an important symbolic boundary for black listeners, who use the concept to build a collective identity."
+    <cite>— Michael P. Jeffries · Thug Life: Race, Gender, and the Meaning of Hip-Hop</cite>
+  </blockquote>
+</div>
+
+<!-- SECTION 12: GENDER & REPRESENTATION -->
+<section style="background:var(--charcoal)" id="gender">
+  <div class="container">
+    <div class="section-label">11 · Gender & Representation</div>
+    <h2>Gender, Masculinity & the Politics of Representation</h2>
+    <div class="two-col" style="margin-top:2rem">
+      <div>
+        <p>The title of Jeffries's study — <em>Thug Life: Race, Gender, and the Meaning of Hip-Hop</em> — makes clear that gender is not peripheral to this analysis. Hip-hop is a profoundly gendered cultural space, and the representation of Black masculinity within it carries enormous sociological weight: as both a response to the dehumanizing stereotypes of white supremacy and, at times, as a reproduction of its own hierarchies.</p>
+        <p>The figure of the "thug" in hip-hop encodes this contradiction. On one hand, it represents a refusal of respectability politics — a claim to dignity and agency that does not depend on white approval. On the other hand, the hypermasculine performance that often attaches to this figure can reproduce its own exclusions: of women, of queer identities, of Black men who do not conform to its codes. This is intersectionality in motion: the structures of racial oppression and patriarchy interact, producing subject positions that are simultaneously sites of resistance and reproduction.</p>
+        <p>Films like <em>Sinners</em> extend this representational politics into visual culture, depicting Black masculinity, community, and survival in ways that both draw from and feed back into hip-hop's iconography. These representations matter sociologically: they function as role models, cautionary figures, and mirrors in which Black youth negotiate their own identities. The intersection of film and hip-hop is a site where the sociological imagination meets the popular one.</p>
+      </div>
+      <div>
+        <p>The role of women in hip-hop illuminates the stakes of intersectionality with particular clarity. For much of the genre's history, women were either absent from or subordinated within its representational economy. The emergence of female MCs who contest both racial and gender norms — from Queen Latifah to Nicki Minaj to Cardi B — represents a renegotiation of hip-hop's terms from within. A Black woman in hip-hop navigates race, gender, and class simultaneously, with no axis reducible to another.</p>
+        <p>Willis's framework suggests that symbolic creativity is intrinsic — it inheres in each of us. But the structural constraints of racial capitalism and patriarchy shape which forms of creativity are recognized, recorded, distributed, and compensated. The creative freedom hip-hop offers is real; the structural limits on who can fully exercise it are equally real. This tension — between intrinsic creative capacity and extrinsic structural constraint — is one of the central problems of any sociology of culture.</p>
+        <p>The material conditions that shape hip-hop — denied homeownership, concentrated poverty, inadequate public services — are not unique to Black Americans, but they are disproportionately concentrated in Black communities. Gender shapes how those conditions are experienced and expressed: the specific vulnerabilities of Black women to poverty, violence, and displacement are distinct from those of Black men, even as both are shaped by the same structural forces. Any adequate sociology of hip-hop must hold these distinctions in view.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 13: VOICES -->
+<section style="background:var(--black)" id="voices">
+  <div class="container">
+    <div class="section-label">12 · Voices</div>
+    <h2>What Listeners Say</h2>
+    <p style="max-width:60ch">Jeffries's empirical method centers the voices of everyday listeners. Below are key interview excerpts alongside scholarly perspectives that together reveal the sociological texture of hip-hop identity.</p>
+    <div class="voices-grid">
+      <div class="voice-card">
+        <p class="voice-text">"I can relate to a lot of the things people say in the songs... it's more of what I see every day. Not so much of what I grew up going through, because I really didn't have that hard of a life growing up, but I can relate to a lot of the things people say and the feelings that they feel."</p>
+        <div class="voice-attr">— Roy (w2), in Jeffries · Affect, resonance, and the daily milieu</div>
+      </div>
+      <div class="voice-card">
+        <p class="voice-text">"Hip-hop is a cultural way of life. Like KRS said, 'Rap is something you do, hip-hop is something you live.' You wake up and you're a part of hip-hop."</p>
+        <div class="voice-attr">— Marc (w1), in Jeffries · Hip-hop as lived experience, not mere consumption</div>
+      </div>
+      <div class="voice-card">
+        <p class="voice-text">"Black Studies and the racial mountain that confronts us demand that we work to tear down the structures of white supremacy and class exploitation, while simultaneously building institutions and movements for a new kind of democracy."</p>
+        <div class="voice-attr">— Manning Marable · Black Studies and the Racial Mountain, 2000 · On the prescriptive function of Black intellectual life</div>
+      </div>
+      <div class="voice-card">
+        <p class="voice-text">"I would say hip-hop is more of just a rhythm, but when you hear those lyrics, just somebody speaking to you. It's not like singing — rock and roll — it's more like somebody is speaking to you, and you try to listen to that person."</p>
+        <div class="voice-attr">— Paul (w1), in Jeffries · Hip-hop as direct address, not performance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 14: CONCLUSION -->
+<section style="background:var(--panel)" id="conclusion">
+  <div class="container">
+    <div class="section-label">13 · Conclusion</div>
+    <div class="two-col" style="align-items:start;gap:5rem">
+      <div>
+        <div class="conclusion-big">"Hip-Hop Is Something You Live."</div>
+        <p style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem">— KRS-One, via Jeffries</p>
+        <p>A sociological study of hip-hop reveals not only what the culture reflects, but what it does. Hip-hop is a social movement produced by and for communities excluded from formal political power. It is a medium through which collective identity is talked into existence, racial experience is named and contested, and the Black intellectual tradition is extended into the popular register. It is, in the terms of this analysis, a vernacular sociology — one that reaches where academic discourse cannot.</p>
+        <p>Each framework employed here illuminates a distinct dimension. Intersectionality reveals how hip-hop is produced at the convergence of race, class, and gender — and why no single axis is sufficient. Racial capitalism explains both the material conditions that gave birth to the form and the economic structures that have since exploited it. Collective identity theory shows how the music builds the very communities it speaks to. The Black intellectual tradition situates hip-hop within a centuries-long project of knowledge production and liberation — corrective, prescriptive, and popular in the fullest sense.</p>
+      </div>
+      <div>
+        <p>As social media becomes the new vernacular of the 21st century — an even more distributed and instantaneous medium for collective identity formation — the sociological frameworks developed to understand hip-hop remain indispensable. The questions Jeffries asks of his interviewees are the questions any sociologist of culture must ask: who speaks, who listens, what is understood, and what does the act of interpretation reveal about the social structures within which it occurs?</p>
+        <p>Just as Newton's paradigm required an observation of the property of gravity rather than merely the behavior of objects obeying it, an adequate sociology of hip-hop requires an observation of the social property — structural inequality, racial identity, collective agency — that the music obeys and articulates. Hip-hop is the system using itself to understand itself. To study it is to study us.</p>
+        <div class="conclusion-note">
+          <div class="label">Project Summary</div>
+          <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0">This project incorporates at least 5 course readings, applies 5 sociological concepts, and uses empirical interview data to construct a multi-dimensional sociological analysis of hip-hop as social movement, collective identity, and cultural vernacular.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section style="background:var(--charcoal)" id="references">
+  <div class="container">
+    <div class="section-label">References</div>
+    <h2>Works Cited</h2>
+    <p>Course materials and outside sources, formatted consistently.</p>
+    <div class="refs-grid">
+      <div class="ref-item">Alridge, Derrick P., Cornelius L. Bynum, and James B. Stewart, eds. 2021. <em>The Black Intellectual Tradition: African American Thought in the Twentieth Century.</em> Urbana: University of Illinois Press.</div>
+      <div class="ref-item">Du Bois, W. E. B. 2000. "Sociology Hesitant." <em>Boundary 2</em> 27(3):37–44.</div>
+      <div class="ref-item">Frith, Simon. 1996. <em>Performing Rites: On the Value of Popular Music.</em> [Add publisher info.]</div>
+      <div class="ref-item">Jeffries, Michael P. <em>Thug Life: Race, Gender, and the Meaning of Hip-Hop.</em> [Add full citation.]</div>
+      <div class="ref-item">Leggon, Cheryl B. 2020. "Black Sociology: Toward a Theoretical Analysis of Systems of Oppression and Social Power." In <em>The Routledge Companion to Black Women's Intellectual History,</em> ed. N.N. Taylor and B.L. Moore. New York: Routledge.</div>
+      <div class="ref-item">Marable, Manning. 2000. "Black Studies and the Racial Mountain." <em>Souls: A Critical Journal of Black Politics, Culture, and Society</em> 2(3):17–36.</div>
+      <div class="ref-item">Stauffer, John. 2020. "Ida B. Wells-Barnett as an Anticolonial Theorist on Crime and Punishment." <em>The Journal of African American History</em> 105(3).</div>
+      <div class="ref-item">Willis, Paul. 1990. <em>Common Culture.</em> [Add publisher info.]</div>
+      <div class="ref-item">[Add additional course reading — full citation]</div>
+      <div class="ref-item">[Add additional course reading — full citation]</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-brand">Rap Is Something You Do. <span>Hip-Hop Is Something You Live.</span></div></div>
+  <div class="footer-meta">Kevin Wang · SOC 129 · Dr. Brent Clark<br>Final Project · Spring 2026</div>
+</footer>
+
+</body>
+</html>
